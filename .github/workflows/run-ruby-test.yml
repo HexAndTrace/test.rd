@@ -1,0 +1,28 @@
+name: Run Ruby Script
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ "main" ] # Triggers on push to the main branch
+  pull_request:
+    branches: [ "main" ] # Triggers on pull requests to the main branch
+  workflow_dispatch:     # Allows you to manually click "Run workflow" in GitHub
+
+jobs:
+  run-ruby-script:
+    runs-on: ubuntu-latest # Uses a standard, free Linux runner
+
+    steps:
+      # Step 1: Check out your repository code onto the runner
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up the Ruby environment
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3' # Specify your preferred Ruby version
+
+      # Step 3: Run your Ruby script
+      - name: Execute test.rb
+        run: ruby test.rb
